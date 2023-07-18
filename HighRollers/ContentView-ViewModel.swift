@@ -18,6 +18,9 @@ extension ContentView {
         @Published var result: RollResult = RollResult.example
         
         @Published var isRolling = false
+        
+        @AppStorage("showsHistory") var showsHistory: Bool = true
+        
         @State private var feedback = UIImpactFeedbackGenerator(style: .rigid)
 
         let diceTypes = [4, 6 , 8, 10, 12, 20, 100]
@@ -82,6 +85,10 @@ extension ContentView {
         func clearResults() {
             results = []
             save()
+        }
+        
+        func toggleShowsHistory() {
+            showsHistory.toggle()
         }
     }
 }

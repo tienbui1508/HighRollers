@@ -9,7 +9,6 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject private var viewModel = ViewModel()
-    @State private var showsHistory = true
     
     var body: some View {
         NavigationStack {
@@ -64,25 +63,17 @@ struct ContentView: View {
                 }
                 
                 Section("History") {
-                    HStack {
-                        Button {
-                            showsHistory.toggle()
-                        } label: {
-                            Label("Show history", systemImage: showsHistory ? "chevron.down" : "chevron.right")
-                            
+                    
+                    Button {
+                        withAnimation {
+                            viewModel.toggleShowsHistory()
                         }
-                        Spacer()
-                        Button {
-                            withAnimation {
-                                viewModel.clearResults()
-                            }
-                        } label: {
-                            Label("Clear result", systemImage: "trash")
-                                .foregroundColor(.red)
-                        }
+                    } label: {
+                        Label("Show history", systemImage: viewModel.showsHistory ? "chevron.down" : "chevron.right")
+                        
                     }
                     
-                    if showsHistory == true {
+                    if viewModel.showsHistory == true {
                         ForEach(viewModel.results) { result in
                             VStack(alignment: .leading) {
                                 Text("\(result.diceNumber) x D\(result.diceType), Total rolled: \(result.totalRolled)")
@@ -92,6 +83,15 @@ struct ContentView: View {
                             .accessibilityElement()
                             .accessibilityLabel("\(result.diceNumber) D\(result.diceType), \(result.description)")
                         }
+                    }
+                    
+                    Button {
+                        withAnimation {
+                            viewModel.clearResults()
+                        }
+                    } label: {
+                        Label("Clear result", systemImage: "trash")
+                            .foregroundColor(.red)
                     }
                 }
             }
