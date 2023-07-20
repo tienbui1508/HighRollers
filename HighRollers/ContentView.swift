@@ -69,7 +69,7 @@ struct ContentView: View {
                             viewModel.toggleShowsHistory()
                         }
                     } label: {
-                        Label("Show history", systemImage: viewModel.showsHistory ? "chevron.down" : "chevron.right")
+                        Label(viewModel.showsHistory ? "Hide history" : "Show history", systemImage: viewModel.showsHistory ? "chevron.down" : "chevron.right")
                         
                     }
                     
