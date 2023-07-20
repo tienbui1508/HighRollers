@@ -104,6 +104,11 @@ struct ContentView: View {
                     }
                 }
             }
+            .onAppear {
+                if viewModel.results.isEmpty == false {
+                    viewModel.result = viewModel.results[0]
+                }
+            }
         }
     }
 }

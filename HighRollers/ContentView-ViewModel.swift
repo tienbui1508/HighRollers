@@ -44,7 +44,6 @@ extension ContentView {
             }
         }
         
-        
         func save() {
             do {
                 let data = try JSONEncoder().encode(results)
